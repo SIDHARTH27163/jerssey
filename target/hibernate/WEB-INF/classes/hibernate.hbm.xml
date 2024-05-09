@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!-- Zoo.hbm.xml -->
+<hibernate-mapping>
+  
+    <class name="com.test.models.Zoo" table="Zoo">
+        <id name="id" type="int">
+            <column name="zoo_id" />
+            <generator class="increment" />
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="name" />
+        </property>
+     
+        <property name="insertTime" type="timestamp">
+            <column name="insert_time" />
+        </property>
+        
+        <!-- Define the many-to-one relationship with Address -->
+        <many-to-one name="address" class="com.test.models.Address" fetch="select">
+            <column name="a_id" not-null="true" />
+        </many-to-one>
+
+        <!-- Define the one-to-many relationship with Animal -->
+       
+    </class>
+    
+    <class name="com.test.models.Address" table="Address">
+        <id name="A_id" type="int">
+            <column name="a_id" />
+            <generator class="increment" />
+        </id>
+        <property name="city" type="java.lang.String">
+            <column name="city" />
+        </property>
+        <property name="state" type="java.lang.String">
+            <column name="state" />
+        </property>
+    </class>
+
+    <class name="com.test.models.Animal" table="Animal">
+        <id name="id" type="int">
+            <column name="animal_id" />
+            <generator class="increment" />
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="name" />
+        </property>
+        <property name="category" type="java.lang.String">
+            <column name="category" />
+        </property>
+        <many-to-one name="zoo" class="com.test.models.Zoo" fetch="select">
+            <column name="zoo_id" not-null="true" />
+        </many-to-one>
+    </class>
+
+</hibernate-mapping>
